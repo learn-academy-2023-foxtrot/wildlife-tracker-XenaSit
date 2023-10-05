@@ -1,0 +1,2 @@
+class WildLivesController < ApplicationController
+end

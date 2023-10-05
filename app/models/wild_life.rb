@@ -1,0 +1,2 @@
+class WildLife < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+module WildLivesHelper
+end
