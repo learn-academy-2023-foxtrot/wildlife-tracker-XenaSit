@@ -29,6 +29,13 @@ rails routs -E
 rails c -->
 
 Can see the data response of all the animals
+<!-- 
+class WildLivesController < ApplicationController
+    def index
+        wild = WildLife.all
+        render json: wild
+    end
+end -->
 
 Can create a new animal in the database
 <!-- 
