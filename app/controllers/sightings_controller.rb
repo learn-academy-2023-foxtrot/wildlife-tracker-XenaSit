@@ -14,7 +14,7 @@ class SightingsController < ApplicationController
         if sight.valid?
             render json: sight
         else
-            render json: sight.error
+            render json: sight.errors
         end
     end
 
@@ -24,7 +24,7 @@ class SightingsController < ApplicationController
         if sight.valid?
             render json: sight
         else
-            render json: sight.error
+            render json: sight.errors
         end
     end
 
@@ -34,13 +34,13 @@ class SightingsController < ApplicationController
         if sight.destroy
             render json: sight
         else
-            render json: sight.error
+            render json: sight.errors
         end
     end
     
     private
 
     def sight_params
-        params.require(:sighting).permit(:animal_id, :latitude, :longitude, :date)
+        params.require(:sighting).permit(:wild_life_id, :latitude, :longitude, :date)
     end
 end

@@ -14,7 +14,7 @@ class WildLivesController < ApplicationController
         if wild.valid?
             render json: wild
         else
-            render json: wild.error
+            render json: wild.errors
         end
     end
 
@@ -24,7 +24,7 @@ class WildLivesController < ApplicationController
         if wild.valid?
             render json: wild
         else
-            render json: wild.error
+            render json: wild.errors
         end
     end
 
@@ -34,14 +34,14 @@ class WildLivesController < ApplicationController
         if wild.destroy
             render json: wild
         else
-            render json: wild.error
+            render json: wild.errors
         end
     end
-    
+
     private
 
     def wild_params
-        params.require(:wild_life).permit(:common_name, :scientific_binomial)
+        params.require(:wild_life).permit(:common_name, :scientific_binomial, :sightings_attributes => [:latitude, :longitude, :date])
     end
 
 
