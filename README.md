@@ -31,26 +31,70 @@ rails c -->
 Can see the data response of all the animals
 <!-- 
 class WildLivesController < ApplicationController
-    def index
-        wild = WildLife.all
-        render json: wild
-    end
-end -->
-
-Can create a new animal in the database
 <!-- 
+rails c
 WildLife.create(common_name: 'Lion', scientific_binomial: 'Panthera leo')
 WildLife.create(common_name: 'House mouse', scientific_binomial: 'Mus musculus')
 WildLife.create(common_name: 'Mute Swan', scientific_binomial: 'Cygnus olor')
 WildLife.create(common_name: 'Screaming hairy armadillo', scientific_binomial: 'Chaetophractus vellerosus')
-WildLife.create(common_name: 'Hellbender salamander', scientific_binomial: 'Cryptobranchus alleganiensis') -->
+WildLife.create(common_name: 'Hellbender salamander', scientific_binomial: 'Cryptobranchus alleganiensis')
 
-Can update an existing animal in the database
+class WildLivesController   
+    def index
+        wild = WildLife.all
+        render json: wild
+    end
 
-Can remove an animal entry in the database
+    def show
+        wild = WildLife.find(params[:id])
+        render json: wild
+    end
+end -->
 
+Can create a new animal in the database (POST)
 
+<!-- class WildLivesController
+        def create 
+        wild = WildLife.create(wild_params)
+        if wild.valid?
+            render json: wild
+        else
+            render json: wild.error
+        end
+    end
 
+    private
+
+    def wild_params
+        params.require(:wild_life).permit(:common_name, :scientific_binomial)
+    end
+
+end -->
+
+Can update an existing animal in the database (PATCH)
+<!-- 
+    def update
+        wild = WildLife.find(params[:id])
+        wild.update(wild_params)
+        if wild.valid?
+            render json: wild
+        else
+            render json: wild.error
+        end
+    end -->
+
+Can remove an animal entry in the database (DELETE)
+<!-- 
+    def destroy
+        wild = WildLife.find(params[:id])
+        
+        if wild.destroy
+            render json: wild
+        else
+            render json: wild.error
+        end
+    end
+ -->
 learnacademy@MacBook-Air-5 rails_api_rangers_wildlife % rails routes -E
 --[ Route 1 ]------------------------------------------------------------------------------------------------------------
 Prefix            | wild_lives
@@ -102,146 +146,7 @@ Prefix            | turbo_resume_historical_location
 Verb              | GET
 URI               | /resume_historical_location(.:format)
 Controller#Action | turbo/native/navigation#resume
---[ Route 11 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | turbo_refresh_historical_location
-Verb              | GET
-URI               | /refresh_historical_location(.:format)
-Controller#Action | turbo/native/navigation#refresh
---[ Route 12 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_postmark_inbound_emails
-Verb              | POST
-URI               | /rails/action_mailbox/postmark/inbound_emails(.:format)
-Controller#Action | action_mailbox/ingresses/postmark/inbound_emails#create
---[ Route 13 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_relay_inbound_emails
-Verb              | POST
-URI               | /rails/action_mailbox/relay/inbound_emails(.:format)
-Controller#Action | action_mailbox/ingresses/relay/inbound_emails#create
---[ Route 14 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_sendgrid_inbound_emails
-Verb              | POST
-URI               | /rails/action_mailbox/sendgrid/inbound_emails(.:format)
-Controller#Action | action_mailbox/ingresses/sendgrid/inbound_emails#create
---[ Route 15 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_mandrill_inbound_health_check
-Verb              | GET
-URI               | /rails/action_mailbox/mandrill/inbound_emails(.:format)
-Controller#Action | action_mailbox/ingresses/mandrill/inbound_emails#health_check
---[ Route 16 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_mandrill_inbound_emails
-Verb              | POST
-URI               | /rails/action_mailbox/mandrill/inbound_emails(.:format)
-Controller#Action | action_mailbox/ingresses/mandrill/inbound_emails#create
---[ Route 17 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_mailgun_inbound_emails
-Verb              | POST
-URI               | /rails/action_mailbox/mailgun/inbound_emails/mime(.:format)
-Controller#Action | action_mailbox/ingresses/mailgun/inbound_emails#create
---[ Route 18 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_conductor_inbound_emails
-Verb              | GET
-URI               | /rails/conductor/action_mailbox/inbound_emails(.:format)
-Controller#Action | rails/conductor/action_mailbox/inbound_emails#index
---[ Route 19 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | 
-Verb              | POST
-URI               | /rails/conductor/action_mailbox/inbound_emails(.:format)
-Controller#Action | rails/conductor/action_mailbox/inbound_emails#create
---[ Route 20 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | new_rails_conductor_inbound_email
-Verb              | GET
-URI               | /rails/conductor/action_mailbox/inbound_emails/new(.:format)
-Controller#Action | rails/conductor/action_mailbox/inbound_emails#new
---[ Route 21 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | edit_rails_conductor_inbound_email
-Verb              | GET
-URI               | /rails/conductor/action_mailbox/inbound_emails/:id/edit(.:format)
-Controller#Action | rails/conductor/action_mailbox/inbound_emails#edit
---[ Route 22 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_conductor_inbound_email
-Verb              | GET
-URI               | /rails/conductor/action_mailbox/inbound_emails/:id(.:format)
-Controller#Action | rails/conductor/action_mailbox/inbound_emails#show
---[ Route 23 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | 
-Verb              | PATCH
-URI               | /rails/conductor/action_mailbox/inbound_emails/:id(.:format)
-Controller#Action | rails/conductor/action_mailbox/inbound_emails#update
---[ Route 24 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | 
-Verb              | PUT
-URI               | /rails/conductor/action_mailbox/inbound_emails/:id(.:format)
-Controller#Action | rails/conductor/action_mailbox/inbound_emails#update
---[ Route 25 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | 
-Verb              | DELETE
-URI               | /rails/conductor/action_mailbox/inbound_emails/:id(.:format)
-Controller#Action | rails/conductor/action_mailbox/inbound_emails#destroy
---[ Route 26 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | new_rails_conductor_inbound_email_source
-Verb              | GET
-URI               | /rails/conductor/action_mailbox/inbound_emails/sources/new(.:format)
-Controller#Action | rails/conductor/action_mailbox/inbound_emails/sources#new
---[ Route 27 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_conductor_inbound_email_sources
-Verb              | POST
-URI               | /rails/conductor/action_mailbox/inbound_emails/sources(.:format)
-Controller#Action | rails/conductor/action_mailbox/inbound_emails/sources#create
---[ Route 28 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_conductor_inbound_email_reroute
-Verb              | POST
-URI               | /rails/conductor/action_mailbox/:inbound_email_id/reroute(.:format)
-Controller#Action | rails/conductor/action_mailbox/reroutes#create
---[ Route 29 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_conductor_inbound_email_incinerate
-Verb              | POST
-URI               | /rails/conductor/action_mailbox/:inbound_email_id/incinerate(.:format)
-Controller#Action | rails/conductor/action_mailbox/incinerates#create
---[ Route 30 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_service_blob
-Verb              | GET
-URI               | /rails/active_storage/blobs/redirect/:signed_id/*filename(.:format)
-Controller#Action | active_storage/blobs/redirect#show
---[ Route 31 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_service_blob_proxy
-Verb              | GET
-URI               | /rails/active_storage/blobs/proxy/:signed_id/*filename(.:format)
-Controller#Action | active_storage/blobs/proxy#show
---[ Route 32 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | 
-Verb              | GET
-URI               | /rails/active_storage/blobs/:signed_id/*filename(.:format)
-Controller#Action | active_storage/blobs/redirect#show
---[ Route 33 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_blob_representation
-Verb              | GET
-URI               | /rails/active_storage/representations/redirect/:signed_blob_id/:variation_key/*filename(.:format)
-Controller#Action | active_storage/representations/redirect#show
---[ Route 34 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_blob_representation_proxy
-Verb              | GET
-URI               | /rails/active_storage/representations/proxy/:signed_blob_id/:variation_key/*filename(.:format)
-Controller#Action | active_storage/representations/proxy#show
---[ Route 35 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | 
-Verb              | GET
-URI               | /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format)
-Controller#Action | active_storage/representations/redirect#show
---[ Route 36 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_disk_service
-Verb              | GET
-URI               | /rails/active_storage/disk/:encoded_key/*filename(.:format)
-Controller#Action | active_storage/disk#show
---[ Route 37 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | update_rails_disk_service
-Verb              | PUT
-URI               | /rails/active_storage/disk/:encoded_token(.:format)
-Controller#Action | active_storage/disk#update
---[ Route 38 ]-----------------------------------------------------------------------------------------------------------
-Prefix            | rails_direct_uploads
-Verb              | POST
-URI               | /rails/active_storage/direct_uploads(.:format)
-Controller#Action | active_storage/direct_uploads#create
+
 
 ## Story 2: In order to track wildlife sightings, as a user of the API, I need to manage animal sightings.
 
