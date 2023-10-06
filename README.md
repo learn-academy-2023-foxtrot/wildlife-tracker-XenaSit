@@ -21,17 +21,17 @@ rails g rspec:install -->
 
 Acceptance Criteria
 
-Create a resource for animal with the following information: 
+Create a resource for animal with the following information: BOOM! Done!
 
 <!-- rails g resource WildLife common_name:string scientific_binomial:string
 rails db:migrate
 rails routs -E
 rails c -->
 
-Can see the data response of all the animals
+Can see the data response of all the animals => WildLife.all
 <!-- 
 class WildLivesController < ApplicationController
-<!-- 
+
 rails c
 WildLife.create(common_name: 'Lion', scientific_binomial: 'Panthera leo')
 WildLife.create(common_name: 'House mouse', scientific_binomial: 'Mus musculus')
@@ -95,7 +95,7 @@ Can remove an animal entry in the database (DELETE)
         end
     end
  -->
-learnacademy@MacBook-Air-5 rails_api_rangers_wildlife % rails routes -E
+<!-- learnacademy@MacBook-Air-5 rails_api_rangers_wildlife % rails routes -E
 --[ Route 1 ]------------------------------------------------------------------------------------------------------------
 Prefix            | wild_lives
 Verb              | GET
@@ -146,7 +146,7 @@ Prefix            | turbo_resume_historical_location
 Verb              | GET
 URI               | /resume_historical_location(.:format)
 Controller#Action | turbo/native/navigation#resume
-
+ -->
 
 ## Story 2: In order to track wildlife sightings, as a user of the API, I need to manage animal sightings.
 
@@ -155,8 +155,10 @@ Branch: sighting-crud-actions
 Acceptance Criteria
 
 Create a resource for animal sightings with the following information: latitude, longitude, date
-Hint: An animal has_many sightings (rails g resource Sighting animal_id:integer ...)
-Hint: Date is written in Active Record as yyyy-mm-dd (“2022-07-28")
+
+    Hint: An animal has_many sightings (rails g resource Sighting animal_id:integer ...)
+    Hint: Date is written in Active Record as yyyy-mm-dd (“2022-07-28")
+
 Can create a new animal sighting in the database
 Can update an existing animal sighting in the database
 Can remove an animal sighting in the database
