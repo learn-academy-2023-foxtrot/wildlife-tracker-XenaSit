@@ -154,20 +154,23 @@ Branch: sighting-crud-actions
 
 Acceptance Criteria
 
-Create a resource for animal sightings with the following information: 
+Create a resource for animal sightings with the following information: BOOM
     - latitude, 
     - longitude, 
     - date
 
-rails g resource Sighting animal_id:integer latitude:string longitude:string date:string
-
+    rails g resource Sighting animal_id:integer latitude:string longitude:string date:string
+<!-- 
     Hint: An animal has_many sightings (rails g resource Sighting animal_id:integer ...)
-    Hint: Date is written in Active Record as yyyy-mm-dd (“2022-07-28")
+    Hint: Date is written in Active Record as yyyy-mm-dd (“2022-07-28") -->
 
-Can create a new animal sighting in the database
+Can create a new animal sighting in the database BOOM
 
-animal_id:integer latitude:string longitude:string date:string
+animal1 = WildLife.find(1)
+animal1.sightings.create(latitude:"51.89°N", longitude:"8.3132°S", date:"2009-07-28")
+refrence: animal_id:integer latitude:string longitude:string date:string
 
+<!-- 
 animal1 = WildLife.find(1)
 animal2 = WildLife.find(2)
 animal3 = WildLife.find(3)
@@ -184,7 +187,8 @@ animal4.sightings.create(latitude:"36°11′N", longitude:"115°08′W", date:"2
 animal5.sightings.create(latitude:"35°07′N", longitude:"106°37′W", date:"2005-05-05") boom
 animal5.sightings.create(latitude:"61°13′N", longitude:"149°54′W", date:"2007-07-07") boom
 animal7.sightings.create(latitude:"21°19′N", longitude:"157°50′W", date:"2008-08-08") boom
-animal7.sightings.create(latitude:"69°20′N", longitude:"88°135′E", date:"2023-12-12") boom
+animal7.sightings.create(latitude:"69°20′N", longitude:"88°135′E", date:"2023-12-12") boom 
+-->
 
 Can update an existing animal sighting in the database BOOM!!!!!
 http://localhost:3000/sightings/1
@@ -198,19 +202,30 @@ Branch: animal-sightings-reports
 Acceptance Criteria
 
 Can see one animal with all its associated sightings
+
+
+
 Hint: Checkout this example on how to include associated records
+
 Can see all the all sightings during a given time period
+
 Hint: Your controller can use a range to look like this:
+
 class SightingsController < ApplicationController
   def index
     sightings = Sighting.where(date: params[:start_date]..params[:end_date])
     render json: sightings
   end
 end
+
 Hint: Be sure to add the start_date and end_date to what is permitted in your strong parameters method
+
 Hint: Utilize the params section in Postman to ease the developer experience
+
 Hint: Routes with params
-Stretch Challenges
+
+
+# Stretch Challenges
 
 ## Story 4: In order to see the wildlife sightings contain valid data, as a user of the API, I need to include proper specs.
 
