@@ -41,7 +41,7 @@ class WildLivesController < ApplicationController
     private
 
     def wild_params
-        params.require(:wild_life).permit(:common_name, :scientific_binomial, :sightings_attributes => [:latitude, :longitude, :date])
+        params.require(:wild_life).permit(:common_name, :scientific_binomial, :sighting_attributes => [:latitude, :longitude, :date])
     end
 
 
