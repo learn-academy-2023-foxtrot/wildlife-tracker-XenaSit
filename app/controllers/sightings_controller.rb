@@ -1,7 +1,7 @@
 class SightingsController < ApplicationController
     def index
         sight = Sighting.all
-        render json: sight
+        render json: sight, include: [:wild_life, :sighting]
     end
 
     def show
