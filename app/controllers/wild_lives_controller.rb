@@ -6,7 +6,7 @@ class WildLivesController < ApplicationController
 
     def show
         wild = WildLife.find(params[:id])
-        render json: wild
+        render json: sight, include: [:wild_life, :sighting]
     end
 
     def create 
